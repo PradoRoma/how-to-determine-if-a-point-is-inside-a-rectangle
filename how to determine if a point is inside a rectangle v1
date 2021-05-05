@@ -1,5 +1,3 @@
-# Определяем лежит ли точка внутри прямоугольника.
-
 from math import sqrt
 
 class PointXY:
