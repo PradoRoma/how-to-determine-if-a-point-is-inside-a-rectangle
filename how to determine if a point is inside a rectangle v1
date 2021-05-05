@@ -1,3 +1,5 @@
+# Определяем лежит ли точка внутри прямоугольника.
+
 from math import sqrt
 
 class PointXY:
@@ -14,6 +16,9 @@ class PointXY:
         if not isinstance(other, PointXY):
             raise  TypeError('other должно быть точкой')
         return  sqrt((self.x - other.x) ** 2 + (self.y - other.y) ** 2)
+
+    def is_inside(self, rect):
+        return  rect.has_inside(self)
 
 
 class Rect:
@@ -49,15 +54,15 @@ p1 = PointXY(5, -9)
 p2 = PointXY(0, 5)
 p3 = PointXY(2,0)
 p4 = PointXY(6, -10)
-
 #print(p1.length())
 #print(p1.distance_to(p2))
 #print(isinstance(p2, PointXY))
-
 r1 = Rect(p1, p2)
 print(r1.area())
 r2 = r1.perimeter()
 print(r2)
 
-print(r1.has_inside(p3))  # True
-print(r1.has_inside(p4))  # False
+print(r1.has_inside(p3))
+print(r1.has_inside(p4))
+print(p3.is_inside(r1))
+print(p4.is_inside(r1))
