@@ -54,9 +54,11 @@ p1 = PointXY(5, -9)
 p2 = PointXY(0, 5)
 p3 = PointXY(2,0)
 p4 = PointXY(6, -10)
+
 #print(p1.length())
 #print(p1.distance_to(p2))
 #print(isinstance(p2, PointXY))
+
 r1 = Rect(p1, p2)
 print(r1.area())
 r2 = r1.perimeter()
