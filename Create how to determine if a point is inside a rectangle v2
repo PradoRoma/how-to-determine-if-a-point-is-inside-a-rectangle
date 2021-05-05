@@ -1,0 +1,73 @@
+#Определяем лежит ли точка внутри прямоугольника.
+
+from math import sqrt
+
+class PointXY:
+
+    def __init__(self,x,y):
+        self.x = x
+        self.y = y
+
+    def length(self):
+        return  sqrt(self.x**2 + self.y**2)
+
+    def distance_to(self, other):
+        #if type(other) is not PointXY:
+        if not isinstance(other, PointXY):
+            raise  TypeError('other должно быть точкой')
+        return  sqrt((self.x - other.x) ** 2 + (self.y - other.y) ** 2)
+
+    def is_inside(self, rect):
+        return  rect.has_inside(self)
+
+
+class Rect:
+
+    def __init__(self, p1, p2):
+        x_min = min(p1.x, p2.x)
+        x_max = max(p1.x, p2.x)
+        y_min = min(p1.y, p2.y)
+        y_max = max(p1.y, p2.y)
+
+        self.tr = PointXY(x_max, y_max)  #top right
+        self.bl = PointXY(x_min, y_min)  #bottom left
+
+    def get_size(self):
+        h = self.tr.x - self.bl.x
+        w = self.tr.y - self.bl.y
+        return h, w
+
+    def area(self):
+        h, w = self.get_size()
+        return  h * w
+
+    def perimeter(self):
+        h, w = self.get_size()
+        return 2 * (h + w)
+
+    def has_inside(self, point):
+        return (
+            (self.bl.x <= point.x <= self.tr.x)
+            and
+            (self.bl.y <= point.y <= self.tr.y)
+             )
+
+
+
+
+p1 = PointXY(5, -9)
+p2 = PointXY(0, 5)
+p3 = PointXY(2,0)
+p4 = PointXY(6, -10)
+#print(p1.length())
+#print(p1.distance_to(p2))
+#print(isinstance(p2, PointXY))
+r1 = Rect(p1, p2)
+print(r1.area())
+r2 = r1.perimeter()
+print(r2)
+
+print(r1.has_inside(p3))
+print(r1.has_inside(p4))
+print(p3.is_inside(r1))
+print(p4.is_inside(r1))
